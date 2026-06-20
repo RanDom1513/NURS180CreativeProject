@@ -2,23 +2,26 @@ import { describe, expect, it } from 'vitest'
 import { cities } from './cities'
 
 describe('city content', () => {
-  it('includes all 15 planned destinations', () => {
-    expect(cities).toHaveLength(15)
+  it('includes all 18 planned destinations', () => {
+    expect(cities).toHaveLength(18)
     expect(cities.map((city) => city.name)).toEqual(
       expect.arrayContaining([
         'Vancouver',
         'Seattle',
-        'Calgary',
         'Las Vegas',
         'Banff',
         'Montreal',
-        'Santa Barbara',
+        'California',
+        'Oxford',
+        'London',
+        'Prague',
+        'Stockholm',
+        'Copenhagen',
         'Suzhou',
         'Hangzhou',
         'Nanchang',
         'Harbin',
         'Shanghai',
-        'Shenzhen',
         'Nanjing',
         'Tongren',
       ]),
@@ -36,14 +39,13 @@ describe('city content', () => {
     }
   })
 
-  it('provides at least five replaceable photo slots per city', () => {
+  it('provides valid photo records for every city', () => {
     for (const city of cities) {
-      expect(city.photos.length).toBeGreaterThanOrEqual(5)
+      expect(city.photos.length).toBeGreaterThan(0)
       for (const photo of city.photos) {
         expect(photo.src).toBeTruthy()
         expect(photo.thumbnail).toBeTruthy()
         expect(photo.alt).toBeTruthy()
-        expect(photo.caption).toBeTruthy()
       }
     }
   })

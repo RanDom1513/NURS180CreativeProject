@@ -46,7 +46,7 @@ export function CityNavigation({
         <div className="city-nav__header">
           <p className="eyebrow">Personal atlas</p>
           <p className="city-nav__title">Choose a place</p>
-          <p className="city-nav__intro">Each light holds a moment of release, nourishment, or return.</p>
+          <p className="city-nav__intro">Each light holds a moment of release.</p>
         </div>
 
         <div className="city-nav__groups">

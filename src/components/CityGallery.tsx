@@ -1,5 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import type { City } from '../data/cities'
+
+type PhotoOrientation = 'loading' | 'landscape' | 'portrait' | 'square'
 
 type CityGalleryProps = {
   city: City | null
@@ -10,6 +12,7 @@ type CityGalleryProps = {
 
 export function CityGallery({ city, photoIndex, onPhotoChange, onClose }: CityGalleryProps) {
   const photoCount = city?.photos.length ?? 0
+  const [orientation, setOrientation] = useState<PhotoOrientation>('loading')
 
   const goToPrevious = () => {
     if (!photoCount) return
@@ -34,6 +37,10 @@ export function CityGallery({ city, photoIndex, onPhotoChange, onClose }: CityGa
     return () => window.removeEventListener('keydown', handleKeyDown)
   })
 
+  useEffect(() => {
+    setOrientation('loading')
+  }, [city?.id, photoIndex])
+
   if (!city) return null
 
   const currentPhoto = city.photos[photoIndex]
@@ -55,13 +62,21 @@ export function CityGallery({ city, photoIndex, onPhotoChange, onClose }: CityGa
 
       {currentPhoto ? (
         <>
-          <div className="gallery__image-wrap">
+          <div className={`gallery__image-wrap gallery__image-wrap--${orientation}`}>
             <img
-              className="gallery__image"
+              className={`gallery__image gallery__image--${orientation}`}
               src={currentPhoto.src}
               alt={currentPhoto.alt}
               loading="lazy"
               decoding="async"
+              onLoad={(event) => {
+                const { naturalWidth, naturalHeight } = event.currentTarget
+                const ratio = naturalWidth / naturalHeight
+
+                if (ratio > 1.15) setOrientation('landscape')
+                else if (ratio < 0.85) setOrientation('portrait')
+                else setOrientation('square')
+              }}
             />
             {isPlaceholder ? <span className="placeholder-label">Sample placeholder</span> : null}
             <div className="gallery__controls">
@@ -71,7 +86,9 @@ export function CityGallery({ city, photoIndex, onPhotoChange, onClose }: CityGa
             </div>
           </div>
 
-          <p className="gallery__caption">{currentPhoto.caption}</p>
+          {currentPhoto.caption ? (
+            <p className="gallery__caption">{currentPhoto.caption}</p>
+          ) : null}
 
           <div className="gallery__thumbnails" aria-label={`${city.name} photo thumbnails`}>
             {city.photos.map((photo, index) => (

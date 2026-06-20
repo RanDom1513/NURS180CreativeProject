@@ -178,11 +178,11 @@ function CityMarker({ city, selected, onSelect }: { city: City; selected: boolea
           setCursor('default')
         }}
       >
-        <sphereGeometry args={[0.13, 14, 14]} />
+        <sphereGeometry args={[0.06, 14, 14]} />
         <meshBasicMaterial transparent opacity={0.001} depthWrite={false} />
       </mesh>
       <mesh ref={pulseRef}>
-        <sphereGeometry args={[selected ? 0.062 : 0.048, 18, 18]} />
+        <sphereGeometry args={[selected ? 0.035 : 0.022, 18, 18]} />
         <meshStandardMaterial
           color={selected ? '#fff4c7' : '#ffd789'}
           emissive={selected ? '#fff0aa' : '#ffad43'}
@@ -190,10 +190,12 @@ function CityMarker({ city, selected, onSelect }: { city: City; selected: boolea
           toneMapped={false}
         />
       </mesh>
-      <mesh scale={selected ? 1.4 : 1}>
-        <ringGeometry args={[0.075, 0.09, 28]} />
-        <meshBasicMaterial color="#ffd98f" transparent opacity={0.7} depthWrite={false} />
-      </mesh>
+      {selected ? (
+        <mesh>
+          <ringGeometry args={[0.047, 0.057, 28]} />
+          <meshBasicMaterial color="#ffd98f" transparent opacity={0.75} depthWrite={false} />
+        </mesh>
+      ) : null}
       {(hovered || selected) && (
         <Html center distanceFactor={7.5} position={[0, 0.23, 0]} style={{ pointerEvents: 'none' }}>
           <span className="globe-label">{city.name}</span>

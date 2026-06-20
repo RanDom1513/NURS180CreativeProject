@@ -21,6 +21,7 @@ describe('CityNavigation', () => {
     )
 
     expect(screen.getByRole('heading', { name: 'North America' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Europe' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'China' })).toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: /hangzhou/i }))

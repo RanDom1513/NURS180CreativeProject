@@ -6,6 +6,18 @@ An English-language interactive creative project about food, travel, and the pla
 
 Requires Node.js 20 or newer and pnpm.
 
+On the project computer, double-click `Start Website.vbs`. It starts the development server and opens the website automatically. Press `Ctrl+C` in the terminal window to stop it.
+
+The PowerShell launcher can also be run directly by right-clicking `start-website.ps1` and selecting **Run with PowerShell**.
+
+If Windows blocks direct script execution, run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\start-website.ps1
+```
+
+To start it manually:
+
 ```powershell
 pnpm install
 pnpm dev
@@ -21,21 +33,34 @@ pnpm build
 ## Add personal photographs
 
 1. Create a folder for a city under `public/photos`, for example `public/photos/vancouver`.
-2. Add web-sized `.webp` images. A longest edge of about 1600 px is sufficient for the gallery; thumbnails can be around 480 px.
-3. Open `src/data/cities.ts` and replace `placeholderPhotos('Vancouver')` with photo objects:
+2. Add web-sized `.jpg` images using sequential names such as `vancouver-01.jpg`, `vancouver-02.jpg`, and so on. A longest edge of about 1600 px is sufficient for the gallery.
+3. Open `src/data/cities.ts` and set the actual photo count:
 
 ```ts
-photos: [
-  {
-    src: '/photos/vancouver/stanley-park.webp',
-    thumbnail: '/photos/vancouver/stanley-park-thumb.webp',
-    alt: 'Evening light along the Stanley Park seawall',
-    caption: 'The long path and open water helped the week feel less crowded.',
-  },
-]
+photos: cityPhotos('vancouver', 'Vancouver', 7),
 ```
 
 City descriptions are optional. Add `description: '...'` to a city only when it contributes something personal.
+Photo captions are also optional. Add captions only for the numbered photos that need them:
+
+```ts
+photos: cityPhotos('vancouver', 'Vancouver', 7, {
+  1: 'The open water helped me slow down after a stressful week.',
+  4: 'Sharing this meal made the day feel lighter.',
+}),
+```
+
+Photos without a caption do not display an empty description area.
+
+## Optimize photographs
+
+After adding and naming JPG photographs, run:
+
+```powershell
+& "C:\Users\75772\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" scripts\optimize-images.py
+```
+
+The script creates a 1600 px WebP gallery image and a 480 px WebP thumbnail for every JPG. Original JPG files are moved to the local `.photo-originals` backup folder, which is excluded from Git and deployment.
 
 ## Change the writing
 
