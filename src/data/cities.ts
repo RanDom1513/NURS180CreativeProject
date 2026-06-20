@@ -94,6 +94,8 @@ export const cities: City[] = [
     region: 'Europe',
     latitude: 51.752,
     longitude: -1.2577,
+    description:
+      'Oxford is known for its centuries-old architecture and rich history, reflected in its colleges, libraries, and historic streets.',
     photos: cityPhotos('oxford', 'Oxford', 5),
   },
   {
@@ -118,6 +120,8 @@ export const cities: City[] = [
     region: 'Europe',
     latitude: 59.3293,
     longitude: 18.0686,
+    description:
+      'Stockholm is known for its intricate murals, opulent royal throne rooms, historic ships, and elegant European architecture.',
     photos: cityPhotos('stockholm', 'Stockholm', 5),
   },
   {
