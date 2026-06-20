@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">City photograph placeholder</title>
+  <desc id="desc">An abstract night street awaiting a personal city photograph.</desc>
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#071424"/>
+      <stop offset="1" stop-color="#24364a"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#263646"/>
+      <stop offset="1" stop-color="#080d14"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#night)"/>
+  <path d="M0 160h390v590H0Zm1180 90h420v500h-420ZM430 310h240v410H430Zm530-95h180v505H960Z" fill="#0b111b"/>
+  <g fill="#e8b968" opacity=".82">
+    <path d="M70 240h80v65H70Zm140 0h80v65h-80Zm-140 120h80v65H70Zm140 0h80v65h-80Z"/>
+    <path d="M1240 330h95v70h-95Zm145 0h95v70h-95Zm-145 125h95v70h-95Z"/>
+    <path d="M1000 280h60v58h-60Zm0 110h60v58h-60Z"/>
+  </g>
+  <path d="m590 1000 190-280h40l190 280Z" fill="url(#road)"/>
+  <path d="M800 755v205" stroke="#f2d6a0" stroke-width="8" stroke-dasharray="38 34" opacity=".72"/>
+  <text x="80" y="900" fill="#f5eadb" font-family="Arial, sans-serif" font-size="36" letter-spacing="7">YOUR CITY MEMORY</text>
+</svg>
