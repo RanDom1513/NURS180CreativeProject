@@ -464,8 +464,7 @@ code {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-top: 1rem;
-  padding: 0.95rem 0.6rem 0.35rem;
+  padding: 0.75rem 0.6rem;
   border: 0;
   border-top: 1px solid var(--line);
   color: var(--gold);
@@ -475,6 +474,20 @@ code {
   font-size: 0.88rem;
   font-style: italic;
   text-align: left;
+}
+
+.reflection-links {
+  margin-top: 1rem;
+  padding-top: 0.2rem;
+  border-top: 1px solid var(--line);
+}
+
+.reflection-links .outro-link {
+  border-top: 0;
+}
+
+.reflection-links .outro-link + .outro-link {
+  border-top: 1px solid rgba(227, 239, 238, 0.08);
 }
 
 .outro-link--selected,
@@ -829,6 +842,34 @@ code {
   transform: rotate(180deg);
 }
 
+.reflection-panel {
+  width: min(760px, calc(100% - 3rem));
+  padding-top: clamp(2.8rem, 5vw, 4.8rem);
+  padding-bottom: clamp(2.4rem, 4vw, 3.8rem);
+}
+
+.reflection-panel h2 {
+  font-size: clamp(2.7rem, 5vw, 4.8rem);
+}
+
+.reflection-panel__body {
+  max-width: 600px;
+  margin: 0 auto;
+  color: #c3c9c7;
+  font-family: Georgia, serif;
+  font-size: clamp(0.92rem, 1.25vw, 1.05rem);
+  line-height: 1.7;
+  text-align: left;
+}
+
+.reflection-panel__body p {
+  margin: 0;
+}
+
+.reflection-panel__body p + p {
+  margin-top: 1rem;
+}
+
 .webgl-fallback {
   display: grid;
   width: min(620px, calc(100% - 3rem));
@@ -1007,6 +1048,15 @@ code {
 
   .outro-panel h2 {
     font-size: clamp(3rem, 15vw, 5rem);
+  }
+
+  .reflection-panel {
+    max-height: calc(100% - 1.5rem);
+    overflow-y: auto;
+  }
+
+  .reflection-panel h2 {
+    font-size: clamp(2.7rem, 13vw, 4.2rem);
   }
 }
 

@@ -3,18 +3,22 @@ import { cities, regions, type City } from '../data/cities'
 type CityNavigationProps = {
   isOpen: boolean
   selectedCity: City | null
+  reflectionActive: boolean
   outroActive: boolean
   onToggle: () => void
   onSelectCity: (city: City) => void
+  onShowReflection: () => void
   onShowOutro: () => void
 }
 
 export function CityNavigation({
   isOpen,
   selectedCity,
+  reflectionActive,
   outroActive,
   onToggle,
   onSelectCity,
+  onShowReflection,
   onShowOutro,
 }: CityNavigationProps) {
   return (
@@ -61,7 +65,7 @@ export function CityNavigation({
                 {cities
                   .filter((city) => city.region === region)
                   .map((city, index) => {
-                    const selected = selectedCity?.id === city.id && !outroActive
+                    const selected = selectedCity?.id === city.id && !reflectionActive && !outroActive
                     return (
                       <li key={city.id}>
                         <button
@@ -82,14 +86,24 @@ export function CityNavigation({
           ))}
         </div>
 
-        <button
-          className={`outro-link${outroActive ? ' outro-link--selected' : ''}`}
-          type="button"
-          onClick={onShowOutro}
-        >
-          <span>Looking Forward</span>
-          <span aria-hidden="true">↗</span>
-        </button>
+        <div className="reflection-links">
+          <button
+            className={`outro-link${reflectionActive ? ' outro-link--selected' : ''}`}
+            type="button"
+            onClick={onShowReflection}
+          >
+            <span>Self-Reflection</span>
+            <span aria-hidden="true">↗</span>
+          </button>
+          <button
+            className={`outro-link${outroActive ? ' outro-link--selected' : ''}`}
+            type="button"
+            onClick={onShowOutro}
+          >
+            <span>Looking Forward</span>
+            <span aria-hidden="true">↗</span>
+          </button>
+        </div>
       </nav>
     </>
   )

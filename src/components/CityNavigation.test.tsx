@@ -13,9 +13,11 @@ describe('CityNavigation', () => {
       <CityNavigation
         isOpen
         selectedCity={null}
+        reflectionActive={false}
         outroActive={false}
         onToggle={vi.fn()}
         onSelectCity={onSelectCity}
+        onShowReflection={vi.fn()}
         onShowOutro={vi.fn()}
       />,
     )
@@ -35,14 +37,17 @@ describe('CityNavigation', () => {
       <CityNavigation
         isOpen
         selectedCity={vancouver}
+        reflectionActive={false}
         outroActive={false}
         onToggle={vi.fn()}
         onSelectCity={vi.fn()}
+        onShowReflection={vi.fn()}
         onShowOutro={vi.fn()}
       />,
     )
 
     expect(screen.getByRole('button', { name: /vancouver/i })).toHaveAttribute('aria-current', 'location')
+    expect(screen.getByRole('button', { name: /self-reflection/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /looking forward/i })).toBeInTheDocument()
   })
 })

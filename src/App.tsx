@@ -4,6 +4,7 @@ import { CityGallery } from './components/CityGallery'
 import { CityNavigation } from './components/CityNavigation'
 import { IntroScreen } from './components/IntroScreen'
 import { LookingForward } from './components/LookingForward'
+import { SelfReflection } from './components/SelfReflection'
 import { cities, type City } from './data/cities'
 import { siteCopy } from './data/siteCopy'
 
@@ -30,6 +31,7 @@ export default function App() {
   const [selectedCity, setSelectedCity] = useState<City | null>(null)
   const [photoIndex, setPhotoIndex] = useState(0)
   const [focusVersion, setFocusVersion] = useState(0)
+  const [reflectionOpen, setReflectionOpen] = useState(false)
   const [outroOpen, setOutroOpen] = useState(false)
   const [webGLAvailable] = useState(supportsWebGL)
 
@@ -41,13 +43,22 @@ export default function App() {
   const selectCity = (city: City) => {
     setSelectedCity(city)
     setPhotoIndex(0)
+    setReflectionOpen(false)
     setOutroOpen(false)
     setFocusVersion((version) => version + 1)
     if (isMobileViewport()) setNavOpen(false)
   }
 
+  const showReflection = () => {
+    setSelectedCity(null)
+    setReflectionOpen(true)
+    setOutroOpen(false)
+    if (isMobileViewport()) setNavOpen(false)
+  }
+
   const showOutro = () => {
     setSelectedCity(null)
+    setReflectionOpen(false)
     setOutroOpen(true)
     if (isMobileViewport()) setNavOpen(false)
   }
@@ -67,9 +78,11 @@ export default function App() {
       <CityNavigation
         isOpen={navOpen}
         selectedCity={selectedCity}
+        reflectionActive={reflectionOpen}
         outroActive={outroOpen}
         onToggle={() => setNavOpen((open) => !open)}
         onSelectCity={selectCity}
+        onShowReflection={showReflection}
         onShowOutro={showOutro}
       />
 
@@ -92,7 +105,7 @@ export default function App() {
       )}
       </section>
 
-      {!selectedCity && !outroOpen ? (
+      {!selectedCity && !reflectionOpen && !outroOpen ? (
         <div className="explore-hint">
           <span className="explore-hint__mouse" aria-hidden="true" />
           <span>Drag to explore · Select a light</span>
@@ -105,6 +118,8 @@ export default function App() {
         onPhotoChange={setPhotoIndex}
         onClose={() => setSelectedCity(null)}
       />
+
+      {reflectionOpen ? <SelfReflection onClose={() => setReflectionOpen(false)} /> : null}
 
       {outroOpen ? <LookingForward onClose={() => setOutroOpen(false)} /> : null}
 
